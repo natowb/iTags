@@ -1,0 +1,28 @@
+##########################################################################
+# Created by NatoWB
+# https://github.com/natowb
+# goto https://github.com/natowb/iPotions for colors and effects
+##########################################################################
+# iTags Settings
+# Supports Color Codes IE &6, &e, &a
+##########################################################################
+prefix: "[&6i&eTags&r]"
+##########################################################################
+# tags
+##########################################################################
+tags:
+  Demo:
+    display: "&aDemo" # what the tag is named
+    lore: "this is a demo tag" # the lore of the tag item
+    prefix: "[&aPrefix]" # sets the players prefix
+    suffix: "[&cSuffix]" # sets the players suffix
+  Test:
+    display: "&aTest" # what the tag is named
+    lore: "this is a demo tag" # the lore of the tag item
+    prefix: "[&aTest]" # sets the players prefix
+    suffix: "" # sets the players suffix
+  Dev:
+    display: "&aDev" # what the tag is named
+    lore: "this is a demo tag" # the lore of the tag item
+    prefix: "" # sets the players prefix
+    suffix: "[&cDev&r]" # sets the players suffix

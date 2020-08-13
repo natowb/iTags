@@ -1,0 +1,24 @@
+name: iTags
+version: ${1.0}
+main: me.inato.tagredeem.Main
+api-version: 1.16
+prefix: Tag Redeem
+authors: [iNato]
+website: https://github.com/natowb
+
+
+commands:
+  itags: # opens GUI
+    usage: /<command> help - gives help info
+permissions:
+  itags.*:
+    children:
+      tags.gui: true
+      tags.give: true
+      tags.revoke: true
+  itags.gui:
+    default: true
+  itags.give:
+    default: op
+  itags.revoke:
+    default: op
