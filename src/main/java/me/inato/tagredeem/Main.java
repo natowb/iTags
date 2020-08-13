@@ -17,7 +17,6 @@ public final class Main extends JavaPlugin {
     private File storeFile;
     private FileConfiguration storeConfig;
 
-
     public static Main ins;
     public Store store;
 
@@ -34,12 +33,17 @@ public final class Main extends JavaPlugin {
         store.loadStoreData(storeConfig);
     }
 
+    @Override
+    public void onDisable() {
+        getServer().getConsoleSender().sendMessage("saving store");
+        store.saveStore(storeConfig, storeFile);
+    }
+
     public void setupConfig() {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
         createCustomConfig();
     }
-
 
     private void createCustomConfig() {
         storeFile = new File(getDataFolder(), "store.yml");
@@ -47,18 +51,11 @@ public final class Main extends JavaPlugin {
             storeFile.getParentFile().mkdirs();
             saveResource("store.yml", false);
         }
-
         storeConfig= new YamlConfiguration();
         try {
             storeConfig.load(storeFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onDisable() {
-        getServer().getConsoleSender().sendMessage("saving store");
-        store.saveStore(storeConfig, storeFile);
     }
 }

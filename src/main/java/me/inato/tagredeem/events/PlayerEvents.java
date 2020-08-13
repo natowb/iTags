@@ -25,8 +25,6 @@ public class PlayerEvents implements Listener {
         if(Main.ins.store.getStoreData(player.getUniqueId())==null) {
             Main.ins.getServer().getConsoleSender().sendMessage(player.getName() + ": adding new StoreData");
             Main.ins.store.addStoreData(player);
-        } else{
-            Main.ins.store.updatePlayerTag(player);
         }
     }
 

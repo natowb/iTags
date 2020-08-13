@@ -24,15 +24,8 @@ public class Store {
 
     public StoreData getStoreData(UUID pID) {
         StoreData d = data.get(pID);
-
         return d;
     };
-
-    /*            for (String s : config.getConfigurationSection("players").getKeys(false)) {
-                sender.sendMessage(s);
-                sender.sendMessage(String.valueOf(config.getStringList("players."+s+".tags")));
-                StoreData d = new StoreData(new HashSet<String>(config.getStringList("players."+s+".tags")));
-                data.put(UUID.fromString(s), d);*/
 
     public void saveStore(FileConfiguration config, File file) {
         for(UUID pID : data.keySet()) {
@@ -40,48 +33,26 @@ public class Store {
             config.set("players."+pID+".tags", new ArrayList<String>(data.get(pID).getTags()));
             config.set("players."+pID+".selected", data.get(pID).getSelectedTag());
         }
-
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        try { config.save(file); } catch (IOException e) { e.printStackTrace(); }
     }
 
     public void addStoreData(Player player) {
         data.put(player.getUniqueId(), new StoreData("",new HashSet<>()));
     }
 
-    public void updatePlayerTag(Player player) {
-//        if(Main.ins.store.getStoreData(player.getUniqueId()).getSelectedTag() != null){
-//            Tag t = Main.ins.store.getTag(Main.ins.store.getStoreData(player.getUniqueId()).getSelectedTag());
-//            player.setDisplayName(t.getPrefix() + ChatColor.RESET + player.getName() + ChatColor.RESET + t.getSuffix() + ChatColor.RESET);
-//        } else{
-//            player.setDisplayName(player.getName());
-//        }
-    }
-
-
     public Tag getTag(String id) {
         for(String name : database.keySet()) {
-            if(name.equalsIgnoreCase(id)) {
-                return database.get(name);
-            }
+            if(name.equalsIgnoreCase(id)) { return database.get(name); }
         }
         return null;
     }
 
-
     public boolean getTagByName(String name) {
         for(String t : database.keySet()) {
-            if(t.equalsIgnoreCase(name)) {
-                return true;
-            }
+            if(t.equalsIgnoreCase(name)) { return true; }
         }
-
         return false;
     }
-
 
     public void loadStoreDatabase(FileConfiguration config) {
         try {
@@ -93,24 +64,17 @@ public class Store {
                 Tag tag = new Tag(display, lore, prefix, suffix, false);
                 database.put(s, tag);
             }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-
-
+        } catch (NullPointerException e) { e.printStackTrace(); }
     }
+
     public void loadStoreData(FileConfiguration config) {
-
-
         try {
             for (String s : config.getConfigurationSection("players").getKeys(false)) {
                 StoreData d = new StoreData(config.getString("players."+s+".selected"),new HashSet<String>(config.getStringList("players."+s+".tags")));
                 data.put(UUID.fromString(s), d);
 
             }
-        } catch (NullPointerException e) {
-
-        }
+        } catch (NullPointerException e) { }
     }
 
 }

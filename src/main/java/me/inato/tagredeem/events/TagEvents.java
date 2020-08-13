@@ -2,23 +2,17 @@ package me.inato.tagredeem.events;
 
 import me.inato.tagredeem.Lib;
 import me.inato.tagredeem.Main;
-
 import me.inato.tagredeem.commands.RevokeCommand;
 import me.inato.tagredeem.data.StoreData;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-
 import org.bukkit.event.EventHandler;
-
 import org.bukkit.event.Listener;
-
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
-
 
 public class TagEvents implements Listener {
 
@@ -33,7 +27,6 @@ public class TagEvents implements Listener {
                     e.setCancelled(true);
                     return;
                 }
-
                 if(e.getCurrentItem() == null) {
                     return;
                 }
@@ -47,7 +40,6 @@ public class TagEvents implements Listener {
                         if(pdata.getSelectedTag() != null) {
                             if(pdata.getSelectedTag().equalsIgnoreCase(tag)) {
                                 Main.ins.store.getStoreData(player.getUniqueId()).setSelectedTag(null);
-                                Main.ins.store.updatePlayerTag(player);
                             }
                         }
                         player.sendMessage("test");
@@ -58,22 +50,20 @@ public class TagEvents implements Listener {
                     player.closeInventory();
                     e.setCancelled(true);
                 }
-                    if(e.getClick().isLeftClick()){
+                if(e.getClick().isLeftClick()){
 
-                        if(pdata.getSelectedTag()!=null) {
-                            if(pdata.getSelectedTag().equalsIgnoreCase(tag)) {
-                                Main.ins.store.getStoreData(player.getUniqueId()).setSelectedTag(null);
-                                Main.ins.store.updatePlayerTag(player);
-                                Lib.successMsg(player ,"you &c<deselected>&a the &6<"+tag+">&a tag");
-                                return;
-                            }
+                    if(pdata.getSelectedTag()!=null) {
+                        if(pdata.getSelectedTag().equalsIgnoreCase(tag)) {
+                            Main.ins.store.getStoreData(player.getUniqueId()).setSelectedTag(null);
+                            Lib.successMsg(player ,"you &c<deselected>&a the &6<"+tag+">&a tag");
+                            return;
                         }
-
-                        Main.ins.store.getStoreData(player.getUniqueId()).setSelectedTag(tag);
-                        Main.ins.store.updatePlayerTag(player);
-                        Lib.successMsg(player ,"you <selected> the &6<"+tag+">&a tag");
                     }
+
+                    Main.ins.store.getStoreData(player.getUniqueId()).setSelectedTag(tag);
+                    Lib.successMsg(player ,"you <selected> the &6<"+tag+">&a tag");
                 }
+            }
         }
         catch (NullPointerException ex) {
             // Stops error if player clicks outside of inventory // should change bad practice
@@ -83,8 +73,6 @@ public class TagEvents implements Listener {
             exx.printStackTrace();
         }
     }
-
-
     @EventHandler
     public void useItem(PlayerInteractEvent event) {
         Player player = event.getPlayer();

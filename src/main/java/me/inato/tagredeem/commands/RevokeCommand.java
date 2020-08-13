@@ -51,6 +51,7 @@ public class RevokeCommand {
         if(notify) {
             player.sendMessage("Revoked " + tagName + " from " + target.getName());
             target.sendMessage(player.getName()+ " Revoked " + tagName + " from you");
+            Lib.successMsg(player, "Revoked &6<"+tagName+">&a from &b<"+target.getName()+">" ); // command sender that he successfully gave the tag
         }
     }
 

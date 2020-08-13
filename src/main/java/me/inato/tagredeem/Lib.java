@@ -18,8 +18,6 @@ public class Lib {
         player.sendMessage(pre + " " +msg);
     }
 
-
-
     public static void errorMsg(Player player, String message) {
         String pre = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("prefix"));
         String msg = ChatColor.translateAlternateColorCodes('&', "&cError: "+ message);
@@ -36,10 +34,6 @@ public class Lib {
         return player.hasPermission("itags."+perm);
     }
 
-    public static void errorPerms(Player player) {
-
-
-    }
 
 
 
